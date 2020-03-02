@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/base.css" type="text/css">
+    <link rel="stylesheet" href="../static/blog-style.css" type="text/css">
+    <link rel="stylesheet" href="../static/comment-page.css" type="text/css">
+    
+    <title>{{ page_title }}</title>
+</head>
+<body>
+
+    <div class="header">
+        <div class="intro wrapper">
+            <a href="{{ url_for('index') }}">Flask App</a>
+            <div>
+                <a href="#" style="margin-right: 0;">教程</a>
+            </div>
+            
+            <div>
+                <a href="#">GitHub</a>
+            </div>
+
+            <div>
+                <a href="#">日志</a>
+            </div>
+
+            <div>
+                <a href="{{ url_for('add') }}">添加记录</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    <div class="footer">
+        <div class="intro wrapper">
+            <!-- <a href="#">回到顶部</a> -->
+        </div>
+    </div>
+</body>
+</html>

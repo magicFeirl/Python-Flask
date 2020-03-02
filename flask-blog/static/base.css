@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif, 微软雅黑;
+    font-size: 16px;
+    background-color: #f4f5f7;
+}
+
+.wrapper {
+    width: 780px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.header {
+    box-shadow: 2px 1px 2px rgba(0, 0, 0, .5);
+    height: 60px;
+    background-color: white;
+}
+
+.intro a{
+    line-height: 60px;
+    color: #666;
+    font-weight: bolder;
+}
+
+.intro a:hover {
+    color: gray;
+}
+
+.header .intro > a {
+    font-size: 20px;
+}
+
+.intro div {
+    float: right;
+    overflow: hidden;
+}
+
+.intro div > a{
+    font-size: 14px;
+    display: block;
+    margin-right: 15px;
+}
+
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    line-height: 30px;
+}
