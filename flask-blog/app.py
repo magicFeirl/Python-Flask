@@ -1,3 +1,5 @@
+import os
+import sys
 from datetime import datetime
 
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -7,7 +9,15 @@ from comment_form import CommentForm
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1/flask-sql'
+
+prefix = r'sqlite:///'
+
+app_path = os.path.join(app.root_path, 'comment.db')
+
+if not sys.platform.startswith('win'):
+    prefix += r'/'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = prefix + app_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -21,8 +31,6 @@ class Comment(db.Model):
     date = db.Column(db.DATETIME)
 
     uid = db.Column(db.Integer, primary_key=True)
-
-    pass
 
     def __repr__(self):
         return f'<{self.username}(uid:{self.uid})\'s comment.>'
