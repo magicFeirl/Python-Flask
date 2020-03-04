@@ -32,7 +32,7 @@ textarea, input {
     background-color: darkcyan;
 }
 
-.username {
+.ctitle {
     display: block;
     width: 80%;
     padding: 5px;
@@ -40,7 +40,7 @@ textarea, input {
     
 }
 
-.submit, .username {
+.submit, .ctitle {
     outline: none;
     height: 30px;
     box-sizing: border-box;
