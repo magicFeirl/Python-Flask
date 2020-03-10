@@ -1,4 +1,4 @@
-Flask练手项目，目标是实现一个留言板。
+一些Flask练手项目
 
-[点我访问线上地址](http://114514.pythonanywhere.com/#)
+* flask-blog [线上留言板](http://114514.pythonanywhere.com/#)
 
