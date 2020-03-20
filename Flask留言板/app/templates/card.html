@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-info-wrap">
+        <div class="title">{% if card.is_topic %}<span style="color: gray;">[置顶]</span>{% endif%} {{ card.title }}</div>
+        <div class="time">#{{ card.id }} {{ card.time }}</div>
+    </div>
+
+    <div class="card-content">{{ card.message }}</div>
+</div>

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="../static/card.css">
+{% endblock %}
+
+{% block content %}
+    {% for card in cards %}
+        {% include 'card.html' %}
+    {% endfor %}
+{% endblock %}

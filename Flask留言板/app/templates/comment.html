@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="../static/comment.css">
+{% endblock %}
+
+{% block content %}
+    <div id="comment-wrap">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.message(placeholder="有什么想说的?", title="留言长度为[1, 255]") }}<br>
+            <div id="submit-wrap">
+                {{ form.title(placeholder='标题是可选项', title="标题长度为[0, 12]") }}
+                <!-- 如果用户拥有管理员权限（登录），显示置顶评论选项 -->
+                {% if not current_user.is_anonymous %}
+                    <span>{{ form.topic_this.label }} {{form.topic_this()}}</span>
+                {% endif %}
+                {{ form.submit() }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+#comment-wrap {
+    width: 850px;
+    margin: 50px auto;
+    height: 200px;
+}
+
+#comment-wrap form{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#title, #message, #sumbit {
+    font-family: inherit;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    resize: none;
+    padding: 5px;
+}
+
+#message {
+    width: 100%;
+    height: 240px;
+}
+
+#submit-wrap {
+    display: flex;
+    height: 30px;
+    margin-top: 7px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#title {
+    width: 70%;
+}
+
+#submit {
+    font-family: inherit;
+    width: 15%;
+    padding: 0;
+    outline: none;
+    background-color: #999;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+}
+
+#submit:hover {
+    background-color: #666;
+    color: #fff;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+     <title>{{ title }}</title>
+    {% else %}
+     <title>MessageBoard</title>
+    {% endif %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css')}}">
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+    <header id="nav">
+        <div class="nav-link-wrap">
+            <ul class="nav-link-list">
+                <li><h2><a href="{{ url_for('index') }}">首页</a></h2></li>
+                {% if not current_user.is_anonymous %}
+                
+                    <li><h2><a href="#">Hello {{ current_user.username }}</a></h2></li>
+                {% endif %}
+            </ul>
+
+            <ul class="nav-link-list">
+                <li><a href="{{ url_for('log') }}">日志</a></li>
+                <li><a href="{{ url_for('comment') }}">留言</a></li>
+                <li><a href="{{ url_for('login') }}">登录</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

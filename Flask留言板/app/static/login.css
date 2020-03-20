@@ -1,0 +1,29 @@
+#form-wrap {
+    height: 300px;
+    display: flex;
+}
+
+#form-wrap form{
+    margin: auto;
+    border: 1px solid rgb(238, 238, 238);
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    flex-direction: column;
+}
+
+#field-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+#field-wrap input, #field-wrap span {
+    margin-bottom: 10px;
+}
+
+#submit {
+    cursor: pointer;
+}
