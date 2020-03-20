@@ -11,6 +11,13 @@ def commit_log(message, title):
     db.session.add(l)
     db.session.commit()
 
+def add_admin(username, pwd):
+    u = User(username=username)
+    u.set_pwd(pwd)
+
+    db.session.add(u)
+    db.session.commit()
+
 
 if __name__ == '__main__':
 
