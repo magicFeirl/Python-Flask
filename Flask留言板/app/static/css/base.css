@@ -37,7 +37,6 @@ ul {
     display: flex;
 }
 
-
 .nav-link-list li {
     margin-right: 10px;
     display: flex;
@@ -54,7 +53,7 @@ ul {
 }
 
 .nav-link-list li a:hover {
-    color: #999;
+    color: #00a1d6;
 }
 
 .content-wrap {
@@ -62,4 +61,21 @@ ul {
     margin: 50px auto;
     display: flex;
     flex-direction: column;
+}
+
+#back-to-top {
+    position: fixed;
+    right: 40px;
+    bottom: 30px;
+    width: 32px;
+    height: 32px;
+}
+
+#back-to-top a{
+    color: #888;
+    font-size: 12px;
+}
+
+#back-to-top a:hover {
+    color: #000;
 }

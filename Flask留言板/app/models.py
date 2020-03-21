@@ -19,12 +19,25 @@ class Comment(db.Model):
     message = db.Column(db.String(255))
     is_topic = db.Column(db.Boolean, default=False) # 是否为置顶评论
 
+    replys = db.relationship('Reply', backref='comment', lazy='dynamic')
+
     def __repr__(self):
         return f'<Comment {self.title}>'
 
     def topic_this(self):
         self.is_topic = True
 
+# 回复表。暂时先写成一对多的形式。
+class Reply(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    time = db.Column(db.DATETIME, default=datetime.utcnow)
+    message = db.Column(db.String(255))
+
+    comment_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
+
+    def __repr__(self):
+        return f'<Reply {self.id}>'
 
 # 日志表
 # 这里不能使用继承

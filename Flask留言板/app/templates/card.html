@@ -1,8 +1,69 @@
-<div class="card">
-    <div class="card-info-wrap">
-        <div class="title">{% if card.is_topic %}<span style="color: gray;">[置顶]</span>{% endif%} {{ card.title }}</div>
-        <div class="time">#{{ card.id }} {{ card.time }}</div>
-    </div>
+<div data-id="{{card.id}}" class="card">
+    <div class="card-wrap">
+        <div class="card-info-wrap">
+            <div class="title">{% if card.is_topic %}<span style="color: gray;">[置顶]</span>{% endif%} {{ card.title }}</div>
+            <div class="time">#{{ card.id }} {{ card.time }}</div>
+        </div>
 
-    <div class="card-content">{{ card.message }}</div>
+        <div class="card-content text">{{ card.message }}</div>
+        <div class="operation">
+            <a class="hide-btn" href="javascript:;">隐藏</a>
+            {% if rep %}
+                {% if card.is_topic %}
+                    {% if not current_user.is_anonymous %}
+                        <a class="reply-btn" href="javascript:;">回复</a>
+                    {% endif %}
+                {% else %}
+                    <a class="reply-btn" href="javascript:;">回复</a>
+                {% endif %}
+            {% endif %}
+
+            {% if rep and not current_user.is_anonymous %}
+            {% if not card.is_topic %}
+                <a class="topic_btn" href="javascript:;">置顶</a>
+            {% else %}
+                <a class="topic_btn" href="javascript:;">取消置顶</a>
+            {% endif %}
+
+            <!--<a class="edit-btn" href="javascript:;">编辑</a>-->
+            <a class="delete-btn" href="javascript:;">删除</a>
+            {% endif %}
+        </div>
+        
+        {% if rep %}
+        {% if not card.replys.first() %}
+        <div class="reply-box" style="display: none;">
+        {% else %}
+        <div class="reply-box">
+        {% endif %}
+            {% for reply in card.replys.all() %}
+                <div data-id="{{ reply.id }}" class="reply">
+                    <div class="time">{{ reply.time }}</div>
+                    <span class="text">{{ reply.message }}</span>
+                    {% if not current_user.is_anonymous %}
+                        <div class="btn-wrap"><a class="delete-btn" href="javascript:;">删除</a></div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="textarea-wrap">
+            <textarea class="ipt-text" placeholder="回复字数请控制在[1, 255]内~"></textarea>
+            <a href="javascript:;" class="sbt-btn">发送评论</a>
+        </div>
+    </div>
 </div>
+
+
+<!-- 
+    <div class="reply text"><div class="time">2020年3月21日12:52:48</div><span>噗哈
+            今天也是好天气
+            啊啦，灵梦你又在偷懒吗？
+            我在休息呢！
+            今天一定是休息日。
+            那么明天呢？
+            神社倒闭之日！
+            Kora！
+            只有9号茶可以么</span>
+    </div>
+-->

@@ -1,10 +1,11 @@
 from app import app, db
-from app.models import Comment, User, Log
+from app.models import Comment, User, Log, Reply
 
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, app=app, comment=Comment, user=User, log=Log)
+    return dict(db=db, app=app, comment=Comment, user=User, \
+    log=Log, reply=Reply)
 
 def commit_log(message, title):
     l = Log(message=message, title=title)
@@ -20,5 +21,4 @@ def add_admin(username, pwd):
 
 
 if __name__ == '__main__':
-
     app.run(debug=True)

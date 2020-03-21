@@ -1,12 +1,15 @@
 from datetime import datetime
 
-from flask import render_template, url_for, redirect
-from flask_login import login_user
+from flask import render_template, url_for, redirect, request
+from flask_login import login_user, logout_user, login_required
 
 from app import app, db, login_manager
 from .forms import CommentForm, LoginForm, LogForm
-from .models import Comment, User, Log
+from .models import Comment, User, Log, Reply
 
+
+def get_comment_by_id(id):
+    return Comment.query.get_or_404(id)
 
 @app.route('/')
 @app.route('/index')
@@ -14,7 +17,10 @@ def index():
     cards = Comment.query.order_by(Comment.is_topic.desc()). \
     order_by(Comment.id.desc()).all()
 
-    return render_template('index.html', title='首页', cards=cards)
+    # replys = Comment.query.replys.all()
+
+    return render_template('index.html', title='留言板', \
+    cards=cards, rep=True)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -34,6 +40,60 @@ def login():
 
     return render_template('login.html', title='登录', form=form)
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.route('/reply', methods=['POST'])
+def reply():
+    data_id = request.form.get('data_id')
+    text = request.form.get('text')
+
+    if len(text) > 0 and len(text) <= 255:
+
+        c = get_comment_by_id(data_id)
+        r = Reply(message=text, \
+        time=datetime.now(tz=app.config['TIMEZONE']), comment=c)
+
+        db.session.add(r)
+        db.session.commit()
+
+    return {'status': '200'}
+
+@app.route('/topic', methods=['POST'])
+@login_required
+def topic():
+    c = get_comment_by_id(request.form.get('data_id'))
+    c.is_topic = not c.is_topic
+    db.session.add(c)
+    db.session.commit()
+
+    return {'status': '200'}
+
+@app.route('/delete', methods=['POST'])
+@login_required
+def delete():
+    c = get_comment_by_id(request.form.get('data_id'))
+    reps = c.replys.all()
+    for rep in reps:
+        db.session.delete(rep)
+    db.session.delete(c)
+
+    db.session.commit()
+    return {'status': '200'}
+
+
+@app.route('/delete_reply', methods=['POST'])
+@login_required
+def delete_reply():
+    r = Reply.query.get_or_404(request.form.get('data_id'))
+    db.session.delete(r)
+
+    db.session.commit()
+    return {'status': '200'}
+
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
     form = CommentForm()
@@ -42,8 +102,6 @@ def comment():
         # 这里标题数据库有默认值，但是''不为None，所以还得写个判断
         title = form.title.data if form.title.data != '' else '无标题'
         is_topic = form.topic_this.data
-
-        print(title, '#', sep='')
 
         c = Comment(message=message, title=title, is_topic=is_topic, \
         time=datetime.now(tz=app.config['TIMEZONE']))
@@ -59,5 +117,7 @@ def comment():
 def log():
     cards = Log.query.order_by(Log.id.desc()).all()
 
-    return render_template('index.html', title='日志', cards=cards)
+    return render_template('index.html', title='日志', cards=cards, \
+    rep=False)
+
 

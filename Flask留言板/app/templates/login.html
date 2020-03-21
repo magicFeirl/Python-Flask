@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
 {% block style %}
-    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% endblock %}
 
 {% block content %}
     <div id="form-wrap">
         <form action="" method="POST">
+            <h2>登录</h2>
             {{ form.hidden_tag() }}
             <div id="field-wrap">
                 {{ form.username.label }}{{ form.username() }}

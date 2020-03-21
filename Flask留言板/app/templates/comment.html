@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block style %}
-    <link rel="stylesheet" href="../static/comment.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/comment.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,14 @@
                     <span>{{ form.topic_this.label }} {{form.topic_this()}}</span>
                 {% endif %}
                 {{ form.submit() }}
+            </div>
+
+            <div class="tips">
+                <br>
+                <div>提示:</div>
+                <div>留言内容长度请控制在[1, 255]内~</div>
+                <div>标题内容长度请控制在[0, 12]内~</div>
+                <div>过于无意义的内容可能会被管理员删除哦~</div>
             </div>
         </form>
     </div>
