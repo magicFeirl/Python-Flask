@@ -29,3 +29,12 @@ def add():
             return redirect(url_for('add'))
     else:
         return render_template('add.html')
+
+
+@app.route('/delete/<int:uid>', methods=['POST'])
+def delete(uid):
+    c = Comment.query.get_or_404(uid)
+    db.session.delete(c)
+    db.session.commit()
+
+    return "{'status':'200'}" # 返回一个status字典表示请求是否成功

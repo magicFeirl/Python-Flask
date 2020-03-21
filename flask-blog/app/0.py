@@ -5,8 +5,6 @@ import pytz
 from flask_sqlalchemy import SQLAlchemy
 
 
-
-
 timezone = pytz.timezone('Asia/Shanghai')
 
 

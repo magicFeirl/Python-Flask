@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='blog-style.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='comment-page.css') }}" type="text/css">
-    
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='main.js') }}"></script>
     <title>HelloWorld</title>
 </head>
 <body>
-
     <div class="header">
         <div class="intro wrapper">
             <a href="{{ url_for('index') }}">首页</a>

@@ -27,12 +27,12 @@
     font-family: inherit;
 }
 
-.more {
+.delete {
     color: cornflowerblue;
     font-weight: bolder;
     float: right;
 }
 
-.more:hover {
-    color: darkcyan;
+.delete:hover {
+    color: darkred;
 }
