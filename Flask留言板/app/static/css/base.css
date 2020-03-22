@@ -57,7 +57,7 @@ ul {
 }
 
 .content-wrap {
-    width: 900px;
+    max-width: 900px;
     margin: 50px auto;
     display: flex;
     flex-direction: column;

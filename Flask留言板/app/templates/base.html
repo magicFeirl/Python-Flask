@@ -28,12 +28,13 @@
             </ul>
 
             <ul class="nav-link-list">
+                <li><a href="https://github.com/magicFeirl/Python-Flask/tree/master/Flask%E7%95%99%E8%A8%80%E6%9D%BF" style="padding-top: 5px;" target="_blank">Github</a></li>
                 <li><a href="{{ url_for('log') }}">日志</a></li>
                 <li><a href="{{ url_for('comment') }}">留言</a></li>
                 {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('login') }}">登录</a></li>
+                <li><a href="{{ url_for('login') }}">登录</a></li>
                 {% else %}
-                    <li><a href="{{ url_for('logout') }}">注销</a></li>
+                <li><a href="{{ url_for('logout') }}">注销</a></li>
                 {% endif %}
             </ul>
         </div>
