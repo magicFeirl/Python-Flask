@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
 
 {% block style %}
+    <script>
+        function check(){
+            let message = $('#message').val();
+            let title = $('#title').val();
+
+            return message.length > 0 && message.length <=255 && title.length <= 12;
+        }
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/comment.css') }}">
 {% endblock %}
 
 {% block content %}
     <div id="comment-wrap">
-        <form action="" method="POST">
+        <form action="" method="POST" onsubmit="return check()">
             {{ form.hidden_tag() }}
             {{ form.message(placeholder="有什么想说的?", title="留言长度为[1, 255]") }}<br>
             <div id="submit-wrap">
                 {{ form.title(placeholder='标题是可选项', title="标题长度为[0, 12]") }}
-                <!-- 如果用户拥有管理员权限（登录），显示置顶评论选项 -->
                 {% if not current_user.is_anonymous %}
+                <!-- 如果用户拥有管理员权限（登录），显示置顶评论选项 -->
                     <span>{{ form.topic_this.label }} {{form.topic_this()}}</span>
                 {% endif %}
                 {{ form.submit() }}

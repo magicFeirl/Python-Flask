@@ -38,24 +38,26 @@ function init_reply_btn(){
     for(let i=0; i<reply_btns.length; i++){
         $(reply_btns[i]).click(function(){
             let root = $(this).parents('div.card-wrap');
+            let relpy_box_wrap = root.find('div.reply-box-wrap');
             let text_wrap = root.find('div.textarea-wrap');
 
-            if (text_wrap.css('display') == 'none'){
-                text_wrap.css('display', 'flex');
+            if (relpy_box_wrap.css('display') == 'none'){
+                relpy_box_wrap.slideDown();
+                relpy_box_wrap.css('display', 'block');
             }else{
-                text_wrap.css('display', 'none');
+                relpy_box_wrap.slideUp();
             }
                 
             text_wrap.find('.sbt-btn').unbind('click').click(function(){
                 let data_id = get_data_id(this, 'div.card');
-                let text = $(this).prev();
+                let text_node = $(this).prev();
+                let text = text_node.val();
                 let self = this;
-                if(text.length > 0){
-                    $.post('reply', {text: text.val(), data_id: data_id}).done(function(){
+                if(text.length > 0 && text.length <= 255){
+                    $.post('reply', {text: text, data_id: data_id}).done(function(){
                         
                         let node = '<div class="reply"><div class="time">刚刚</div>'+
-                        '<span class="text">' + text.val() + '</span></div>'
-
+                        '<span class="text">' + text + '</span></div>'
                         let reply_box = $(self).parents('div.card').find('div.reply-box');
 
                         if(reply_box.css('display') == 'none'){
@@ -63,11 +65,11 @@ function init_reply_btn(){
                         }
 
                         reply_box.append(node);
-                        text.val("");
+                        text_node.val("");
                         reply_box.scrollTop(100000); // 这里用了一个比较敷衍的办法
                     });
 
-                    $(this).parent().hide('fast');
+                    $(this).parent().parent().hide('fast');
                 }
             });
         });

@@ -82,9 +82,13 @@
 }
 
 .textarea-wrap {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.reply-box-wrap {
+    display: none;
 }
 
 .ipt-text {
