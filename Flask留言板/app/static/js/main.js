@@ -17,11 +17,14 @@ function init_hide_btn(){
     let hide_btns = $('.hide-btn');
     for(let i=0; i<hide_btns.length; i++){
         $(hide_btns[i]).click(function(){
-            $(this).parents('div.card-wrap').hide('fast', function(){
-                let node = '<div class="hide">显示此条</div>'
-                $(this).parent().append(node);
+            let root = $(this).parents('div.card-wrap');
+            let node = '<div class="hide" style="display: none;">显示此条</div>'
+            root.parent().append(node);
+
+            root.slideUp('fast', function(){
+                $('.hide').fadeIn('slow');
                 $('.hide').click(function(){
-                    $(this).prev().show('fast');
+                    root.slideDown('fast');
                     $(this).remove();
                 });
             });

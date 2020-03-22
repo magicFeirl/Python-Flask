@@ -10,6 +10,7 @@
     border-radius: 5px;
     max-height: 330px;
     overflow: auto;
+    min-height: 33px;
 }
 
 .text {
