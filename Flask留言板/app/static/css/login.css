@@ -7,14 +7,14 @@
 #form-wrap form{
     margin: auto;
     border: 1px solid rgb(238, 238, 238);
-    padding: 0 5px 20px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #fff;
     flex-direction: column;
-    width: 60%;
+    width: 50%;
+    height: 100%;
 }
 
 #field-wrap {
@@ -22,10 +22,31 @@
     flex-direction: column;
 }
 
-#field-wrap input, #field-wrap span {
+#field-wrap input{
     margin-bottom: 10px;
+}
+
+#field-wrap span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 15px;
+}
+
+#field-wrap span input[type="checkbox"] {
+    margin: 0 5px;
 }
 
 #submit {
     cursor: pointer;
+    border: 1px solid rgb(238, 238, 238);
+    outline: none;
+    font-family: inherit;
+    border-radius: 5px;
+    height: 24px;
+}
+
+#submit:hover {
+    background-color: #666;
+    color: white;
 }
