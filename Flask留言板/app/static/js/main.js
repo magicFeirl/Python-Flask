@@ -22,8 +22,9 @@ function init_hide_btn(){
             root.parent().append(node);
 
             root.slideUp('fast', function(){
-                $('.hide').fadeIn('slow');
-                $('.hide').click(function(){
+                let curr = $(this).parent().find('.hide');
+                curr.fadeIn('slow');
+                curr.click(function(){
                     root.slideDown('fast');
                     $(this).remove();
                 });
