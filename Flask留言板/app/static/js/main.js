@@ -7,6 +7,7 @@ function init(){
     init_reply_btn();
     init_topic_btn();
     init_root_del_btn();
+    init_status_btn();
 }
 
 function get_data_id(self, p){
@@ -15,6 +16,7 @@ function get_data_id(self, p){
 
 function init_hide_btn(){
     let hide_btns = $('.hide-btn');
+    // 这里可以用jq的each方法简化，其他通过循环绑定事件的方法同理
     for(let i=0; i<hide_btns.length; i++){
         $(hide_btns[i]).click(function(){
             let root = $(this).parents('div.card-wrap');
@@ -118,4 +120,21 @@ function init_root_del_btn(){
             });
         }
     }
+}
+
+/** 
+* 初始化登陆可见按钮 
+* 这里不会判断服务端返回的状态，因此点重新显示仍会导致留言卡片被隐藏
+*/
+function init_status_btn(){
+    $('a.see').each(function(){
+        $(this).unbind('click').click(function(){
+            let did = get_data_id(this, 'div.card');
+            let root = $(this).parents('div.card');
+
+            $.post('hide', {data_id: did}).done(function(){
+                root.hide('fast');
+            });
+        });
+    });
 }

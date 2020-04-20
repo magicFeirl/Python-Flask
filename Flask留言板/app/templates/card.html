@@ -25,6 +25,12 @@
                 <a class="topic_btn" href="javascript:;">取消置顶</a>
             {% endif %}
 
+            {% if not card.is_hide %}
+                <a class="see" href="javascript:;">登陆可见</a>
+            {% else%}
+                <a class="see" href="javascript:;">取消登陆可见</a>
+            {% endif %}
+
             <!--<a class="edit-btn" href="javascript:;">编辑</a>-->
             <a class="delete-btn" href="javascript:;">删除</a>
             {% endif %}

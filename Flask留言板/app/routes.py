@@ -84,6 +84,15 @@ def delete():
     db.session.commit()
     return {'status': '200'}
 
+@app.route('/hide', methods=['POST'])
+@login_required
+def hide():
+    c = get_comment_by_id(request.form.get('data_id'))
+    c.hide_this()
+    db.session.add(c)
+    db.session.commit()
+
+    return {'status': '200'}
 
 @app.route('/delete_reply', methods=['POST'])
 @login_required

@@ -6,6 +6,8 @@
 
 {% block content %}
     {% for card in cards %}
-        {% include 'card.html' %}
+        {% if not card.is_hide or not current_user.is_anonymous %}
+            {% include 'card.html' %}
+        {% endif %}
     {% endfor %}
 {% endblock %}

@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 850px;
     margin: 50px auto;
-    height: 200px;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -40,7 +40,7 @@
 }
 
 #title {
-    width: 70%;
+    flex-grow: 1;
 }
 
 #submit {

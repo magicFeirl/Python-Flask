@@ -8,6 +8,7 @@ class CommentForm(FlaskForm):
     message = TextAreaField(validators=[DataRequired(), Length(1, 255)])
     title = TextField(validators=[Length(0, 12)])
     topic_this = BooleanField('置顶该条')
+    hide_this = BooleanField('登陆可见')
 
     submit = SubmitField('发送')
 

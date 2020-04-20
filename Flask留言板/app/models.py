@@ -18,6 +18,7 @@ class Comment(db.Model):
     title = db.Column(db.String(12), index=True, default='无标题')
     message = db.Column(db.String(255))
     is_topic = db.Column(db.Boolean, default=False) # 是否为置顶评论
+    is_hide = db.Column(db.Boolean, default=False)
 
     replys = db.relationship('Reply', backref='comment', lazy='dynamic')
 
@@ -26,6 +27,9 @@ class Comment(db.Model):
 
     def topic_this(self):
         self.is_topic = True
+
+    def hide_this(self):
+        self.is_hide = not self.is_hide
 
 # 回复表。暂时先写成一对多的形式。
 class Reply(db.Model):
