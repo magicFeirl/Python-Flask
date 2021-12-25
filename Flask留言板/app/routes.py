@@ -14,13 +14,11 @@ def get_comment_by_id(id):
 @app.route('/')
 @app.route('/index')
 def index():
-    cards = Comment.query.order_by(Comment.is_topic.desc()). \
-    order_by(Comment.id.desc()).all()
+    cards = Comment.query.order_by(Comment.is_topic.desc()).order_by(Comment.id.desc()).all()
 
     # replys = Comment.query.replys.all()
 
-    return render_template('index.html', title='留言板', \
-    cards=cards, rep=True)
+    return render_template('index.html', title='留言板',cards=cards, rep=True)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -44,6 +42,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+
     return redirect(url_for('index'))
 
 @app.route('/reply', methods=['POST'])
@@ -111,9 +110,11 @@ def comment():
         # 这里标题数据库有默认值，但是''不为None，所以还得写个判断
         title = form.title.data if form.title.data != '' else '无标题'
         is_topic = form.topic_this.data
+        is_hide = form.hide_this.data
 
-        c = Comment(message=message, title=title, is_topic=is_topic, \
-        time=datetime.now(tz=app.config['TIMEZONE']))
+        c = Comment(message=message, title=title, is_topic=is_topic,
+        is_hide=is_hide, time=datetime.now(tz=app.config['TIMEZONE']))
+
         db.session.add(c)
         db.session.commit()
 
@@ -126,7 +127,16 @@ def comment():
 def log():
     cards = Log.query.order_by(Log.id.desc()).all()
 
-    return render_template('index.html', title='日志', cards=cards, \
-    rep=False)
+    return render_template('index.html', title='日志',
+    cards=cards,rep=False)
 
+# 课设写的迫真贪吃蛇
+@app.route('/game')
+def game():
+    return render_template('/game/index.html')
+
+
+@app.route('/game/images')
+def game1():
+    return render_template('/game/tcs/index.html')
 
